@@ -52,14 +52,14 @@ void insert_end()
 }
 void insert_between()
 {
-    int index,i=0,tem;
+    int index,i=1,tem;
     struct node *temp = (struct node *)malloc(sizeof(struct node));
     struct node *newNode = (struct node *)malloc(sizeof(struct node));
     temp=head;
     printf("\nAt which index you want to insert node : ");
     scanf("%d",&index);
 
-    while (i<index-2)
+    while (i<index-1)
     {
         temp=temp->next;
         i++; 
@@ -101,6 +101,61 @@ void display()
     }
 }
 
+void delete_first_node()
+{
+    if (head==NULL)
+    {
+        printf("\nList is Empty\n");
+    }
+    else
+    {
+        struct node *temp = (struct node *)malloc(sizeof(struct node));
+        temp = head;
+        head=temp->next;
+        free(temp);
+        
+    }
+    
+}
+
+void delete_last_node()
+{
+    if (head==NULL)
+    {
+        printf("\nList is Empty\n");
+    }
+    else
+    {
+        struct node *temp = (struct node *)malloc(sizeof(struct node));
+        temp=head;
+        while (temp->next->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=NULL;
+        
+    }  
+}
+
+void delete_specific_node()
+{
+    struct node *ptr = (struct node *)malloc(sizeof(struct node));
+    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    ptr=head;
+    int position;
+    printf("\nEnter Node position to delete :  ");
+    scanf("%d",&position);
+    for (int i = 1; i < position-1; i++)
+    {
+        temp=ptr;
+        ptr=ptr->next;
+        
+    }
+    temp->next=ptr->next;
+    
+    
+}
+
 int main()
 {
     while (1)
@@ -123,7 +178,15 @@ int main()
         case 4:
             display();
             break;
-        
+        case 5:
+            delete_first_node();
+            break;
+        case 6:
+            delete_last_node();
+            break;
+        case 7:
+            delete_specific_node();
+            break;
         default:
         printf("\nInvalid choice\n");
             break;
